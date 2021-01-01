@@ -58,8 +58,8 @@ class CalculatorFragment : BaseFragment<CalculatorViewModel>(
     }
   }
 
-  override fun onDestroyView() {
-    viewModel.onDestroy()
-    super.onDestroyView()
+  override fun onStop() {
+    viewModel.onStop()
+    super.onStop()
   }
 }

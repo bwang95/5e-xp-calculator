@@ -68,7 +68,7 @@ class CalculatorViewModel(
         .let(disposables::add)
   }
 
-  fun onDestroy() {
+  fun onStop() {
     val list = CalcEntityList(
         date = Date(),
         entities = mutableEntityModels.value
