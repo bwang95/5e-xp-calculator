@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cerridan.dndxpcalc.ui.EditEntityDialogView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_margin"
+    >
+
+  <EditText
+      android:id="@+id/et_edit_dialog_quantity"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/default_margin_half"
+      android:autofillHints="number"
+      android:hint="@string/edit_dialog_hint_quantity"
+      android:inputType="number"
+      app:layout_constraintTop_toBottomOf="@id/sp_edit_dialog_type"
+      />
+
+  <EditText
+      android:id="@+id/et_edit_dialog_value"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:autofillHints="number"
+      android:hint="@string/edit_dialog_hint_value"
+      android:inputType="number"
+      android:minWidth="@dimen/min_value_width"
+      app:layout_constraintBottom_toBottomOf="@id/et_edit_dialog_quantity"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintTop_toTopOf="@id/et_edit_dialog_quantity"
+      />
+
+  <Spinner
+      android:id="@+id/sp_edit_dialog_value_type"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/default_margin_half"
+      android:minWidth="@dimen/min_value_type_width"
+      app:layout_constraintBottom_toBottomOf="@id/et_edit_dialog_quantity"
+      app:layout_constraintEnd_toStartOf="@id/et_edit_dialog_value"
+      app:layout_constraintTop_toTopOf="@id/et_edit_dialog_quantity"
+      />
+
+  <Spinner
+      android:id="@+id/sp_edit_dialog_type"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
+</com.cerridan.dndxpcalc.ui.EditEntityDialogView>

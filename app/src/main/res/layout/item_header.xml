@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.cerridan.dndxpcalc.ui.HeaderItemView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/grey_600"
+    android:paddingBottom="@dimen/default_margin_quarter"
+    android:paddingEnd="@dimen/default_margin"
+    android:paddingStart="@dimen/default_margin"
+    android:paddingTop="@dimen/default_margin_quarter"
+    android:textColor="@color/white"
+    tools:text="@string/header_character"
+    />
