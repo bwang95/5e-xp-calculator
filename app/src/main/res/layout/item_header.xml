@@ -9,6 +9,6 @@
     android:paddingEnd="@dimen/default_margin"
     android:paddingStart="@dimen/default_margin"
     android:paddingTop="@dimen/default_margin_quarter"
-    android:textColor="@color/white"
+    android:textColor="@android:color/white"
     tools:text="@string/header_character"
     />

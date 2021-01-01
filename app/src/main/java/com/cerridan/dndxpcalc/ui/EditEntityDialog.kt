@@ -1,9 +1,9 @@
 package com.cerridan.dndxpcalc.ui
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface.BUTTON_POSITIVE
 import android.view.LayoutInflater
+import androidx.appcompat.app.AlertDialog
 import com.cerridan.dndxpcalc.R
 import com.cerridan.dndxpcalc.model.CalcEntity
 
