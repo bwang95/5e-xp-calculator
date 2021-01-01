@@ -1,7 +1,7 @@
 package com.cerridan.dndxpcalc.model.util
 
+import com.cerridan.dndxpcalc.R
 import com.cerridan.dndxpcalc.R.string
-import com.cerridan.dndxpcalc.util.CalculationException
 import com.cerridan.dndxpcalc.model.CalcEntity
 import com.cerridan.dndxpcalc.model.CalcResult
 import com.cerridan.dndxpcalc.model.EntityType.CHARACTER
@@ -11,6 +11,7 @@ import com.cerridan.dndxpcalc.model.ValueType.CR
 import com.cerridan.dndxpcalc.model.ValueType.LEVEL
 import com.cerridan.dndxpcalc.model.ValueType.XP
 import com.cerridan.dndxpcalc.model.manager.RulesetManager
+import com.cerridan.dndxpcalc.util.CalculationException
 import kotlin.math.roundToInt
 
 object XPCalculator {
@@ -25,7 +26,7 @@ object XPCalculator {
 
   fun calculate(entities: List<CalcEntity>): CalcResult {
     val players = entities.filter { it.type == CHARACTER }
-    val playerQuantity = players.fold(0) { result, player -> result + player.quantity }
+    val playerQuantity = players.entityQty
     val (monsterXp, multiplier) = calculateMonsterValues(entities.filter { it.type == MONSTER })
     val thresholds = generatePlayerThresholds(players)
     val adjustedXp = (monsterXp * multiplier).roundToInt()
@@ -43,17 +44,8 @@ object XPCalculator {
 
   private fun generatePlayerThresholds(players: List<CalcEntity>): List<Int> {
     val playerThresholds = players.map { player ->
-      val level = when (player.valueType) {
-        LEVEL -> player.value
-        XP -> ruleset.xpToPlayerLevel.last { (xp, _) -> xp <= player.value }.second
-        CR -> 0
-      }
       ruleset.levelsToDifficulty
-        .getOrElse(level) { throw CalculationException(
-          string.error_invalid_level,
-          "Invalid Level"
-        )
-        }
+        .getValue(player.charLevel)
         .map { it * player.quantity }
     }
     val difficultyThresholds = MutableList(playerThresholds.first().size) { 0 }
@@ -65,20 +57,10 @@ object XPCalculator {
 
   private fun calculateMonsterValues(monsters: List<CalcEntity>): Pair<Int, Double> {
     val monsterXp = monsters.fold(0) { result, entity ->
-      val xp = when (entity.valueType) {
-        LEVEL -> 0
-        XP -> entity.value
-        CR -> ruleset.crToXp.getOrElse(entity.value) {
-          throw CalculationException(
-            string.error_invalid_cr,
-            "Invalid CR Value"
-          )
-        }
-      }
-      result + (xp * entity.quantity)
+      result + (entity.monsterXp * entity.quantity)
     }
-    val quantity = monsters.fold(0) { result, monster -> result + monster.quantity }
-    val multiplier = ruleset.monstersToMultipliers.last { (min, _) -> min <= quantity }.second
+    val quantity = monsters.entityQty
+    val (_, multiplier) = ruleset.monstersToMultipliers.last { (min, _) -> min <= quantity }
 
     return monsterXp to multiplier
   }
@@ -100,4 +82,23 @@ object XPCalculator {
         .map { it.minMonsters to it.multipler }
     )
   }
+
+  private val CalcEntity.monsterXp: Int
+    get() = when (valueType) {
+      LEVEL -> 0
+      XP -> value
+      CR -> ruleset.crToXp.getOrElse(value) {
+        throw CalculationException(R.string.error_invalid_cr, "Invalid CR Value")
+      }
+    }
+
+  private val CalcEntity.charLevel: Int
+    get() = when (valueType) {
+      LEVEL -> value
+      XP -> ruleset.xpToPlayerLevel.last { (xp, _) -> xp <= value }.second
+      CR -> 0
+    }
+
+  private val List<CalcEntity>.entityQty: Int
+    get() = fold(0) { result, entity -> result + entity.quantity }
 }

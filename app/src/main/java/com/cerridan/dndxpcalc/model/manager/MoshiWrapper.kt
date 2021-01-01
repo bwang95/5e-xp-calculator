@@ -10,7 +10,7 @@ object MoshiWrapper {
     .add(KotlinJsonAdapterFactory())
     .build()
 
-  fun <T> serialize(obj: T, clazz: Class<T>): String = moshi.adapter(clazz).toJson(obj)
+  fun <T> serialize(obj: T, type: Class<T>): String = moshi.adapter(type).toJson(obj)
 
-  fun <T> deserialize(json: String, clazz: Class<T>): T? = moshi.adapter(clazz).fromJson(json)
+  fun <T> deserialize(json: String, type: Class<T>): T? = moshi.adapter(type).fromJson(json)
 }
