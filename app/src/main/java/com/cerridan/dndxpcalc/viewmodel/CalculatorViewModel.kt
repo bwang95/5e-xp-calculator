@@ -7,12 +7,17 @@ import com.cerridan.dndxpcalc.adapter.calc.CalculatorCallbacks
 import com.cerridan.dndxpcalc.adapter.calc.CalculatorEpoxyModel
 import com.cerridan.dndxpcalc.adapter.calc.CalculatorEpoxyModel.EntityItem
 import com.cerridan.dndxpcalc.adapter.calc.CalculatorEpoxyModel.HeaderItem
+import com.cerridan.dndxpcalc.exception.CalculationException
 import com.cerridan.dndxpcalc.model.CalcEntity
 import com.cerridan.dndxpcalc.model.CalcEntityList
+import com.cerridan.dndxpcalc.model.CalcResult
 import com.cerridan.dndxpcalc.model.EntityType
 import com.cerridan.dndxpcalc.model.EntityType.CHARACTER
 import com.cerridan.dndxpcalc.model.EntityType.MONSTER
-import com.cerridan.dndxpcalc.model.util.EntityFileWriter
+import com.cerridan.dndxpcalc.model.manager.MoshiWrapper
+import com.cerridan.dndxpcalc.model.manager.SavedStateManager
+import com.cerridan.dndxpcalc.model.util.XPCalculator
+import com.cerridan.dndxpcalc.util.DiscreteEvent
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import java.util.Date
 
@@ -29,8 +34,14 @@ class CalculatorViewModel(
     )
   }
 
+  private val mutableMessages = MutableLiveData<String>()
+  val messages: LiveData<String> get() = mutableMessages
+
   private val mutableCanCalculate = MutableLiveData<Boolean>()
   val canCalculate: LiveData<Boolean> get() = mutableCanCalculate
+
+  private val mutableCalculate = MutableLiveData<DiscreteEvent<String>>()
+  val calculate: LiveData<DiscreteEvent<String>> get() = mutableCalculate
 
   private val mutableEntityModels = MutableLiveData<List<CalculatorEpoxyModel>>()
   val entityModels: LiveData<List<CalculatorEpoxyModel>> get() = mutableEntityModels
@@ -41,7 +52,7 @@ class CalculatorViewModel(
   private val entitiesSubject = BehaviorSubject.createDefault<List<CalcEntity>>(emptyList())
 
   fun onCreate() {
-    EntityFileWriter
+    SavedStateManager
         .readFromSharedPreferences()
         ?.entities
         ?.let(entitiesSubject::onNext)
@@ -66,7 +77,7 @@ class CalculatorViewModel(
             ?: emptyList()
     )
 
-    EntityFileWriter.saveToSharedPreferences(list)
+    SavedStateManager.saveToSharedPreferences(list)
   }
 
   override fun onEntityItemClicked(entity: CalcEntity) {
@@ -87,6 +98,19 @@ class CalculatorViewModel(
     val newList = entitiesSubject.value?.toMutableList() ?: mutableListOf()
     newList.removeAll { it.id == id }
     entitiesSubject.onNext(newList)
+  }
+
+  fun onCalculateClicked() {
+    val result = try {
+      XPCalculator.calculate(entitiesSubject.value)
+    } catch (e: CalculationException) {
+      mutableMessages.postValue(appContext.getString(e.userMessage))
+      null
+    }
+
+    if (result != null) {
+      mutableCalculate.postValue(DiscreteEvent(MoshiWrapper.serialize(result, CalcResult::class.java)))
+    }
   }
 
   private fun composeListWithHeaders(entities: List<CalcEntity>): List<CalculatorEpoxyModel> {

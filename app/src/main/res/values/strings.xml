@@ -15,4 +15,15 @@
   <string name="edit_dialog_hint_value">Value</string>
   <string name="content_description_add">Add</string>
   <string name="content_description_calculate">Calculate</string>
+  <string name="error_invalid_cr">Invalid CR value</string>
+  <string name="error_invalid_level">Invalid Level</string>
+  <string name="result_adjusted_xp">Total Adjusted XP</string>
+  <string name="result_threshold_easy">Easy</string>
+  <string name="result_threshold_medium">Medium</string>
+  <string name="result_threshold_hard">Hard</string>
+  <string name="result_threshold_deadly">Deadly</string>
+  <string name="result_encounter_difficulty">Encounter Difficulty</string>
+  <string name="result_monster_xp">Total Monster XP</string>
+  <string name="result_divided_monster_xp">Monster XP per Character</string>
+  <string name="result_divided_adjusted_xp">Adjusted XP per Character</string>
 </resources>

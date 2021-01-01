@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.add
 import com.cerridan.dndxpcalc.R
 import com.cerridan.dndxpcalc.fragment.CalculatorFragment
+import com.cerridan.dndxpcalc.fragment.ResultFragment
 import com.cerridan.dndxpcalc.util.bindView
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +21,15 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager
             .beginTransaction()
-            .add(R.id.fl_main_fragment_host, CalculatorFragment())
+            .replace(R.id.fl_main_fragment_host, CalculatorFragment())
+            .commit()
+    }
+
+    fun showResult(serializedResult: String) {
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fl_main_fragment_host, ResultFragment.create(serializedResult))
+            .addToBackStack(null)
             .commit()
     }
 }

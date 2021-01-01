@@ -4,15 +4,21 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
 import androidx.lifecycle.observe
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.cerridan.dndxpcalc.R
+import com.cerridan.dndxpcalc.activity.MainActivity
 import com.cerridan.dndxpcalc.adapter.calc.CalculatorEpoxyController
 import com.cerridan.dndxpcalc.ui.EditEntityDialog
 import com.cerridan.dndxpcalc.util.bindView
 import com.cerridan.dndxpcalc.viewmodel.CalculatorViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 class CalculatorFragment : BaseFragment<CalculatorViewModel>(
     layout = R.layout.fragment_calculator,
@@ -30,9 +36,20 @@ class CalculatorFragment : BaseFragment<CalculatorViewModel>(
 
     recyclerView.layoutManager = LinearLayoutManager(context)
     recyclerView.adapter = controller.adapter
+    recyclerView.addItemDecoration(DividerItemDecoration(context, VERTICAL))
     addButton.setOnClickListener { viewModel.onAddEntityClicked() }
+    calculateButton.setOnClickListener { viewModel.onCalculateClicked() }
 
     viewModel.entityModels.observe(viewLifecycleOwner, controller::setData)
+    viewModel.calculate.observe(viewLifecycleOwner) {
+      val data = it.consumeEvent()
+      if (data != null) {
+        (activity as? MainActivity)?.showResult(data)
+      }
+    }
+    viewModel.messages.observe(viewLifecycleOwner) {
+      Toast.makeText(context, it, LENGTH_LONG).show()
+    }
     viewModel.canCalculate.observe(viewLifecycleOwner) { shouldShowButton ->
       if (shouldShowButton) calculateButton.show() else calculateButton.hide()
     }
