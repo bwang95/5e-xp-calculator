@@ -2,27 +2,18 @@
 
 ### Summary
 
-This is a quick-start Android template that has some common dependencies set up. Its goal is to make it easy to quickly put together an app with dynamic data coming from a single server URL, although it should be easily extensible if required.
-
-### Structure
-
-The example app contains a MainActivity with a Navigation controller and a drawer. The default fragment is a SwipeRefreshLayout that queries a non-existent service.
+This is an XP calculator app for 5e, in a similar vein to [kastark's Encounter Calculator](https://kastark.co.uk/rpgs/encounter-calculator-5th/).
 
 ### Dependencies
 
-The template is written entirely in Kotlin and depends on the following:
-- RxJava 2
-- RxAndroid 2
+The app is written entirely in Kotlin and depends on the following:
+- RxJava 3
+- RxAndroid 3
 - Epoxy
-- Phrase
 - Moshi
-- OkHttp 3
-- Retrofit 2
 - AndroidX
-  - SwipeRefreshLayout
+  - ConstraintLayout
   - RecyclerView
   - AppCompat
-  - Core KTX
   - Lifecycle
-  - Navigation
   - Material Components
