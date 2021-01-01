@@ -28,17 +28,9 @@ class EditEntityDialog(
       as EditEntityDialogView
 
     val (title, positiveText, shouldShowDelete) = if (initialEntity != null) {
-      Triple(
-        R.string.edit_dialog_edit,
-        R.string.edit_dialog_ok,
-        true
-      )
+      Triple(R.string.edit_dialog_edit, R.string.edit_dialog_ok, true)
     } else {
-      Triple(
-        R.string.edit_dialog_add,
-        R.string.edit_dialog_action_add,
-        false
-      )
+      Triple(R.string.edit_dialog_add, R.string.edit_dialog_action_add, false)
     }
 
     var builder = AlertDialog.Builder(context)
