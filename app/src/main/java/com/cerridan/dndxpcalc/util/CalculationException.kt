@@ -1,4 +1,4 @@
-package com.cerridan.dndxpcalc.exception
+package com.cerridan.dndxpcalc.util
 
 import androidx.annotation.StringRes
 

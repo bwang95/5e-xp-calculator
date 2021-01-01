@@ -1,4 +1,4 @@
-package com.cerridan.dndxpcalc.activity
+package com.cerridan.dndxpcalc
 
 import android.os.Bundle
 import android.view.View

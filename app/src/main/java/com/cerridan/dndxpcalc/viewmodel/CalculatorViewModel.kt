@@ -7,7 +7,7 @@ import com.cerridan.dndxpcalc.adapter.calc.CalculatorCallbacks
 import com.cerridan.dndxpcalc.adapter.calc.CalculatorEpoxyModel
 import com.cerridan.dndxpcalc.adapter.calc.CalculatorEpoxyModel.EntityItem
 import com.cerridan.dndxpcalc.adapter.calc.CalculatorEpoxyModel.HeaderItem
-import com.cerridan.dndxpcalc.exception.CalculationException
+import com.cerridan.dndxpcalc.util.CalculationException
 import com.cerridan.dndxpcalc.model.CalcEntity
 import com.cerridan.dndxpcalc.model.CalcEntityList
 import com.cerridan.dndxpcalc.model.CalcResult

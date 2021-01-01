@@ -1,7 +1,7 @@
 package com.cerridan.dndxpcalc.model.util
 
-import com.cerridan.dndxpcalc.R
-import com.cerridan.dndxpcalc.exception.CalculationException
+import com.cerridan.dndxpcalc.R.string
+import com.cerridan.dndxpcalc.util.CalculationException
 import com.cerridan.dndxpcalc.model.CalcEntity
 import com.cerridan.dndxpcalc.model.CalcResult
 import com.cerridan.dndxpcalc.model.EntityType.CHARACTER
@@ -11,7 +11,6 @@ import com.cerridan.dndxpcalc.model.ValueType.CR
 import com.cerridan.dndxpcalc.model.ValueType.LEVEL
 import com.cerridan.dndxpcalc.model.ValueType.XP
 import com.cerridan.dndxpcalc.model.manager.RulesetManager
-import com.cerridan.dndxpcalc.model.manager.SavedStateManager
 import kotlin.math.roundToInt
 
 object XPCalculator {
@@ -50,7 +49,11 @@ object XPCalculator {
         CR -> 0
       }
       ruleset.levelsToDifficulty
-        .getOrElse(level) { throw CalculationException(R.string.error_invalid_level, "Invalid Level") }
+        .getOrElse(level) { throw CalculationException(
+          string.error_invalid_level,
+          "Invalid Level"
+        )
+        }
         .map { it * player.quantity }
     }
     val difficultyThresholds = MutableList(playerThresholds.first().size) { 0 }
@@ -66,7 +69,10 @@ object XPCalculator {
         LEVEL -> 0
         XP -> entity.value
         CR -> ruleset.crToXp.getOrElse(entity.value) {
-          throw CalculationException(R.string.error_invalid_cr, "Invalid CR Value")
+          throw CalculationException(
+            string.error_invalid_cr,
+            "Invalid CR Value"
+          )
         }
       }
       result + (xp * entity.quantity)
