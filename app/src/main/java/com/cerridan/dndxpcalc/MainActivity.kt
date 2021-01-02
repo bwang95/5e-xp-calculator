@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     fun showResult(result: CalcResult) {
         supportFragmentManager
             .beginTransaction()
+            .setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out)
             .add(R.id.fl_main_fragment_host, ResultFragment.create(result))
             .addToBackStack(null)
             .commit()
