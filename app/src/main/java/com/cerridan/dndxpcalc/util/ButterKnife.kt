@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
+// Taken from https://github.com/JakeWharton/kotterknife.
+
 fun <V : View> View.bindView(id: Int)
     : ReadOnlyProperty<View, V> = required(id, viewFinder)
 fun <V : View> Activity.bindView(id: Int)

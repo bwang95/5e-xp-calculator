@@ -12,12 +12,19 @@ import com.cerridan.dndxpcalc.adapter.calc.CalculatorCallbacks
 import com.cerridan.dndxpcalc.model.CalcEntity
 import com.cerridan.dndxpcalc.util.bindView
 
+/**
+ * Item view for a [CalcEntity] used by the Calculator Fragment.
+ *
+ * @author Brian
+ * @since December 31st, 2020
+ */
 @ModelView(defaultLayout = R.layout.item_entity)
 class EntityItemView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
+
   private val quantityView: TextView by bindView(R.id.tv_entity_item_quantity)
   private val valueTypeView: TextView by bindView(R.id.tv_entity_item_value_type)
   private val valueView: TextView by bindView(R.id.tv_entity_item_value)

@@ -8,6 +8,12 @@ import com.squareup.moshi.rawType
 import java.lang.reflect.Type
 import java.util.Date
 
+/**
+ * Date Adapter Factory for Moshi. Converts to and from [Long] timestamps.
+ *
+ * @author Brian
+ * @since December 31st, 2020
+ */
 class DateAdapterFactory : JsonAdapter.Factory {
   override fun create(
     type: Type,
@@ -21,6 +27,9 @@ class DateAdapterFactory : JsonAdapter.Factory {
     }
   }
 
+  /**
+   * Simple Date Adapter for Moshi. Converts to and from [Long] timestamps.
+   */
   class SimpleDateAdapter(
     private val longAdapter: JsonAdapter<Long>
   ) : JsonAdapter<Date>() {

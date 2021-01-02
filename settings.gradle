@@ -1,2 +1,3 @@
-rootProject.name='Android Template'
+rootProject.name='5e XP Calculator'
+
 include ':app'

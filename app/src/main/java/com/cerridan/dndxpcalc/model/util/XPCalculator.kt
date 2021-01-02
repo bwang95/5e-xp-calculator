@@ -14,7 +14,18 @@ import com.cerridan.dndxpcalc.model.manager.RulesetManager
 import com.cerridan.dndxpcalc.util.CalculationException
 import kotlin.math.roundToInt
 
+/**
+ * XP Calculation logic.
+ *
+ * @author Brian
+ * @since December 31st, 2020
+ */
 object XPCalculator {
+  /**
+   * More efficient ruleset model for the XP calculator.
+   *
+   * @see createRulesetModel
+   */
   private class RulesetModel(
     val crToXp: Map<Int, Int>,
     val xpToPlayerLevel: List<Pair<Int, Int>>,
@@ -24,6 +35,11 @@ object XPCalculator {
 
   private val ruleset by lazy { createRulesetModel(RulesetManager.ruleset) }
 
+  /**
+   * Calculates XP and returns a [CalcResult].
+   *
+   * @throws CalculationException if any of the input is invalid.
+   */
   fun calculate(entities: List<CalcEntity>): CalcResult {
     val players = entities.filter { it.type == CHARACTER }
     val playerQuantity = players.entityQty
@@ -42,6 +58,7 @@ object XPCalculator {
     )
   }
 
+  /** Generates the encounter difficulty threshold numbers. */
   private fun generatePlayerThresholds(players: List<CalcEntity>): List<Int> {
     val playerThresholds = players.map { player ->
       ruleset.levelsToDifficulty
@@ -55,6 +72,7 @@ object XPCalculator {
     return difficultyThresholds
   }
 
+  /** Computes the raw monster XP and adjusted XP multiplier. */
   private fun calculateMonsterValues(monsters: List<CalcEntity>): Pair<Int, Double> {
     val monsterXp = monsters.fold(0) { result, entity ->
       result + (entity.monsterXp * entity.quantity)
@@ -65,6 +83,7 @@ object XPCalculator {
     return monsterXp to multiplier
   }
 
+  /** Transforms a [Ruleset] to a [RulesetModel] used for actual calculation. */
   private fun createRulesetModel(ruleset: Ruleset): RulesetModel {
     val crToXp = mutableMapOf<Int, Int>()
     ruleset.crToXp.forEach { crToXp[it.cr] = it.xp }
@@ -83,6 +102,7 @@ object XPCalculator {
     )
   }
 
+  /** Convenience extension for obtaining Monster XP from a [CalcEntity] */
   private val CalcEntity.monsterXp: Int
     get() = when (valueType) {
       LEVEL -> 0
@@ -92,6 +112,7 @@ object XPCalculator {
       }
     }
 
+  /** Convenience extension for obtaining Character Level from a [CalcEntity] */
   private val CalcEntity.charLevel: Int
     get() = when (valueType) {
       LEVEL -> value
@@ -99,6 +120,9 @@ object XPCalculator {
       CR -> 0
     }
 
+  /**
+   * Convenience extension for obtaining total entity quantity from a list of [CalcEntity] objects.
+   */
   private val List<CalcEntity>.entityQty: Int
     get() = fold(0) { result, entity -> result + entity.quantity }
 }

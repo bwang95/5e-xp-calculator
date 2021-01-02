@@ -11,12 +11,20 @@ import com.airbnb.epoxy.ModelView
 import com.cerridan.dndxpcalc.R
 import com.cerridan.dndxpcalc.util.bindView
 
+/**
+ * Simple item view for the Result Fragment.
+ * Displays a title and a value.
+ *
+ * @author Brian
+ * @since December 31st, 2020
+ */
 @ModelView(defaultLayout = R.layout.item_result)
 class ResultItemView @JvmOverloads constructor(
   context: Context,
   attrs: AttributeSet? = null,
   defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
+
   private val titleView: TextView by bindView(R.id.tv_result_item_title)
   private val valueView: TextView by bindView(R.id.tv_result_item_value)
 

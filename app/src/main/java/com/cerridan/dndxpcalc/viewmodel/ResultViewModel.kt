@@ -7,8 +7,15 @@ import com.cerridan.dndxpcalc.R
 import com.cerridan.dndxpcalc.adapter.result.ResultEpoxyModel
 import com.cerridan.dndxpcalc.model.CalcResult
 
+/**
+ * ViewModel for the Result Fragment.
+ *
+ * @author Brian
+ * @since December 31st, 2020
+ */
 class ResultViewModel(application: Application) : BaseViewModel(application) {
   companion object {
+    /** Titles for the difficulty thresholds. */
     private val THRESHOLD_TITLES = listOf(
       R.string.result_threshold_easy,
       R.string.result_threshold_medium,
@@ -18,8 +25,10 @@ class ResultViewModel(application: Application) : BaseViewModel(application) {
   }
 
   private val mutableModels = MutableLiveData<List<ResultEpoxyModel>>()
+  /** Epoxy models for the recycler view. */
   val models: LiveData<List<ResultEpoxyModel>> = mutableModels
 
+  /** Called when the view is created. Constructs Epoxy Models. */
   fun onCreate(result: CalcResult) {
     val difficulty = appContext.getString(THRESHOLD_TITLES[result.thresholdIdx])
     val newModels = mutableListOf(ResultEpoxyModel(R.string.result_encounter_difficulty, difficulty))

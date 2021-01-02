@@ -7,6 +7,9 @@ import androidx.appcompat.app.AlertDialog
 import com.cerridan.dndxpcalc.R
 import com.cerridan.dndxpcalc.model.CalcEntity
 
+/**
+ * Dialog
+ */
 class EditEntityDialog(
   private val context: Context,
   private val initialEntity: CalcEntity?
@@ -14,13 +17,9 @@ class EditEntityDialog(
   private var addListener: ((CalcEntity) -> Unit) = {}
   private var deleteListener: ((CalcEntity) -> Unit) = {}
 
-  fun setAddListener(listener: (CalcEntity) -> Unit) {
-    addListener = listener
-  }
+  fun setAddListener(listener: (CalcEntity) -> Unit) = apply { addListener = listener }
 
-  fun setDeleteListener(listener: (CalcEntity) -> Unit) {
-    deleteListener = listener
-  }
+  fun setDeleteListener(listener: (CalcEntity) -> Unit) = apply { deleteListener = listener }
 
   fun show() {
     val view = LayoutInflater.from(context)

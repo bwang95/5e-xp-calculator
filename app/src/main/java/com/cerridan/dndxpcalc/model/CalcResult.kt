@@ -3,6 +3,14 @@ package com.cerridan.dndxpcalc.model
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+/**
+ * Represents a calculation result.
+ *
+ * @see com.cerridan.dndxpcalc.model.util.XPCalculator
+ *
+ * @author Brian
+ * @since December 31st, 2020
+ */
 @JsonClass(generateAdapter = true)
 data class CalcResult(
   @Json(name = "monster_xp") val monsterXp: Int,
