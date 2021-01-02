@@ -28,6 +28,8 @@
   <string name="result_divided_monster_xp">Monster XP per Character</string>
   <string name="result_divided_adjusted_xp">Adjusted XP per Character</string>
   <string name="result_encounter_difficulty">Encounter Difficulty</string>
+  <string name="result_header_results">Results</string>
+  <string name="result_header_thresholds">Difficulty Thresholds</string>
   <string name="result_monster_xp">Total Monster XP</string>
 
   <string name="result_threshold_easy">Easy</string>

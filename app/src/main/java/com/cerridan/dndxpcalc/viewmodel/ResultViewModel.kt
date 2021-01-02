@@ -5,6 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.cerridan.dndxpcalc.R
 import com.cerridan.dndxpcalc.adapter.result.ResultEpoxyModel
+import com.cerridan.dndxpcalc.adapter.result.ResultEpoxyModel.HeaderItem
+import com.cerridan.dndxpcalc.adapter.result.ResultEpoxyModel.ResultItem
 import com.cerridan.dndxpcalc.model.CalcResult
 
 /**
@@ -31,16 +33,19 @@ class ResultViewModel(application: Application) : BaseViewModel(application) {
   /** Called when the view is created. Constructs Epoxy Models. */
   fun onCreate(result: CalcResult) {
     val difficulty = appContext.getString(THRESHOLD_TITLES[result.thresholdIdx])
-    val newModels = mutableListOf(ResultEpoxyModel(R.string.result_encounter_difficulty, difficulty))
-    newModels += THRESHOLD_TITLES.mapIndexed { idx, title ->
-      ResultEpoxyModel(title, String.format("%,d", result.encounterThresholds[idx]))
-    }
-    newModels += listOf(
-      ResultEpoxyModel(R.string.result_monster_xp, String.format("%,d", result.monsterXp)),
-      ResultEpoxyModel(R.string.result_divided_monster_xp, String.format("%,d", result.dividedMonsterXp)),
-      ResultEpoxyModel(R.string.result_adjusted_xp, String.format("%,d", result.adjustedXp)),
-      ResultEpoxyModel(R.string.result_divided_adjusted_xp, String.format("%,d", result.dividedAdjustedXp)),
+    val newModels = mutableListOf(
+      HeaderItem(R.string.result_header_results),
+      ResultItem(R.string.result_monster_xp, String.format("%,d", result.monsterXp)),
+      ResultItem(R.string.result_divided_monster_xp, String.format("%,d", result.dividedMonsterXp)),
+      ResultItem(R.string.result_adjusted_xp, String.format("%,d", result.adjustedXp)),
+      ResultItem(R.string.result_divided_adjusted_xp, String.format("%,d", result.dividedAdjustedXp)),
+      ResultItem(R.string.result_encounter_difficulty, difficulty)
     )
+    newModels += HeaderItem(R.string.result_header_thresholds)
+    newModels += THRESHOLD_TITLES.mapIndexed { idx, title ->
+      ResultItem(title, String.format("%,d", result.encounterThresholds[idx]))
+    }
+
     mutableModels.postValue(newModels)
   }
 }

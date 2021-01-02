@@ -1,6 +1,9 @@
 package com.cerridan.dndxpcalc.adapter.result
 
 import com.cerridan.dndxpcalc.adapter.BaseEpoxyController
+import com.cerridan.dndxpcalc.adapter.result.ResultEpoxyModel.HeaderItem
+import com.cerridan.dndxpcalc.adapter.result.ResultEpoxyModel.ResultItem
+import com.cerridan.dndxpcalc.ui.headerItemView
 import com.cerridan.dndxpcalc.ui.resultItemView
 
 /**
@@ -13,8 +16,13 @@ import com.cerridan.dndxpcalc.ui.resultItemView
  */
 class ResultEpoxyController : BaseEpoxyController<ResultEpoxyModel>() {
 
-  override fun addViewForModel(position: Int, model: ResultEpoxyModel) {
-    resultItemView {
+  override fun addViewForModel(position: Int, model: ResultEpoxyModel) = when (model) {
+    is HeaderItem -> headerItemView {
+      id(model.id)
+      header(model.header)
+    }
+
+    is ResultItem -> resultItemView {
       id(model.title.toString())
       title(model.title)
       value(model.value)
