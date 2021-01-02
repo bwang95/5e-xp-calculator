@@ -1,11 +1,10 @@
 <resources>
-  <dimen name="default_margin_2x">32dp</dimen>
-  <dimen name="default_margin">16dp</dimen>
-  <dimen name="default_margin_half">8dp</dimen>
-
-  <dimen name="nav_header_height">176dp</dimen>
-  <dimen name="min_value_width">48sp</dimen>
-  <dimen name="min_value_type_width">48sp</dimen>
   <dimen name="default_margin_quarter">4dp</dimen>
+  <dimen name="default_margin_half">8dp</dimen>
+  <dimen name="default_margin">16dp</dimen>
+  <dimen name="default_margin_2x">32dp</dimen>
+
   <dimen name="min_value_edit_width">64sp</dimen>
+  <dimen name="min_value_type_width">48sp</dimen>
+  <dimen name="min_value_width">48sp</dimen>
 </resources>

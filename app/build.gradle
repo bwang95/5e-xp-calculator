@@ -14,14 +14,11 @@ android {
     targetSdkVersion 30
     versionCode 10000
     versionName "1.0"
-
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
 
   buildTypes {
     release {
       minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
 
@@ -43,6 +40,8 @@ ext {
 
 dependencies {
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+  // Epoxy
   implementation "com.airbnb.android:epoxy:$epoxy_version"
   kapt "com.airbnb.android:epoxy-processor:$epoxy_version"
 
@@ -61,7 +60,7 @@ dependencies {
   implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
   implementation 'com.google.android.material:material:1.2.1'
 
-  // Square
+  // Moshi
   implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
   kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
 }

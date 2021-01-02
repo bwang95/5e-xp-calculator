@@ -1,14 +1,12 @@
 <resources>
-  <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-    <!-- Customize your theme here. -->
+    <item name="alertDialogTheme">@style/DNDXPCalc.AlertDialog</item>
+    <item name="colorAccent">@color/theme_accent</item>
     <item name="colorPrimary">@color/theme_primary</item>
     <item name="colorPrimaryDark">@color/theme_primary_dark</item>
     <item name="colorSecondary">@color/theme_accent</item>
     <item name="colorOnSecondary">@android:color/white</item>
-    <item name="colorAccent">@color/theme_accent</item>
     <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Primary</item>
-    <item name="alertDialogTheme">@style/DNDXPCalc.AlertDialog</item>
   </style>
 
   <style name="AppTheme.NoActionBar">

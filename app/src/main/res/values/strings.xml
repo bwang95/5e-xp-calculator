@@ -1,29 +1,37 @@
 <resources>
   <string name="app_name">5e Experience Calculator</string>
-  <string name="header_character">Characters</string>
-  <string name="header_monster">Monsters</string>
-  <string name="description_cr">CR</string>
-  <string name="description_xp">XP</string>
-  <string name="description_level">Level</string>
-  <string name="edit_dialog_edit">Edit</string>
-  <string name="edit_dialog_add">Add</string>
-  <string name="edit_dialog_action_add">Add</string>
-  <string name="edit_dialog_ok">OK</string>
-  <string name="edit_dialog_cancel">Cancel</string>
-  <string name="edit_dialog_delete">Delete</string>
-  <string name="edit_dialog_hint_quantity">Quantity</string>
-  <string name="edit_dialog_hint_value">Value</string>
+
   <string name="content_description_add">Add</string>
   <string name="content_description_calculate">Calculate</string>
+
+  <string name="description_cr">CR</string>
+  <string name="description_level">Level</string>
+  <string name="description_xp">XP</string>
+
   <string name="error_invalid_cr">Invalid CR value</string>
   <string name="error_invalid_level">Invalid Level</string>
+
+  <string name="edit_dialog_action_add">Add</string>
+  <string name="edit_dialog_add">Add</string>
+  <string name="edit_dialog_cancel">Cancel</string>
+  <string name="edit_dialog_delete">Delete</string>
+  <string name="edit_dialog_edit">Edit</string>
+  <string name="edit_dialog_ok">OK</string>
+
+  <string name="edit_dialog_hint_quantity">Quantity</string>
+  <string name="edit_dialog_hint_value">Value</string>
+
+  <string name="header_character">Characters</string>
+  <string name="header_monster">Monsters</string>
+
   <string name="result_adjusted_xp">Total Adjusted XP</string>
+  <string name="result_divided_monster_xp">Monster XP per Character</string>
+  <string name="result_divided_adjusted_xp">Adjusted XP per Character</string>
+  <string name="result_encounter_difficulty">Encounter Difficulty</string>
+  <string name="result_monster_xp">Total Monster XP</string>
+
   <string name="result_threshold_easy">Easy</string>
   <string name="result_threshold_medium">Medium</string>
   <string name="result_threshold_hard">Hard</string>
   <string name="result_threshold_deadly">Deadly</string>
-  <string name="result_encounter_difficulty">Encounter Difficulty</string>
-  <string name="result_monster_xp">Total Monster XP</string>
-  <string name="result_divided_monster_xp">Monster XP per Character</string>
-  <string name="result_divided_adjusted_xp">Adjusted XP per Character</string>
 </resources>
