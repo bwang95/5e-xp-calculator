@@ -17,3 +17,9 @@ The app is written entirely in Kotlin and depends on the following:
   - AppCompat
   - Lifecycle
   - Material Components
+
+### Attributions
+Icon courtesy of [FontAwesome](https://fontawesome.com)<br>
+Licensed via [CC BY 4.0](https://fontawesome.com/license/free).
+- [Wizard Hat](https://fontawesome.com/icons/hat-wizard)
+- [Dragon](https://fontawesome.com/icons/dragon)
