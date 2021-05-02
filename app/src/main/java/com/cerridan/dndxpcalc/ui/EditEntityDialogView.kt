@@ -19,6 +19,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.SerialDisposable
+import java.util.UUID
 
 /**
  * Custom view for the [EditEntityDialog].
@@ -45,6 +46,8 @@ class EditEntityDialogView @JvmOverloads constructor(
   private lateinit var typeAdapter: EntityTypeSpinnerAdapter
   private lateinit var valueTypeAdapter: ValueTypeSpinnerAdapter
 
+  private var entityId = ""
+
   /**
    * A listener for validation events.
    * Called with true when the view obtains enough valid data to construct a [CalcEntity],
@@ -70,6 +73,7 @@ class EditEntityDialogView @JvmOverloads constructor(
       null
     } else {
       CalcEntity(
+        id = entityId.takeIf(String::isNotBlank) ?: UUID.randomUUID().toString(),
         type = typeSpinner.selectedItem as EntityType,
         quantity = quantityEditText.text.toString().toInt(),
         valueType = valueTypeSpinner.selectedItem as ValueType,
@@ -119,6 +123,7 @@ class EditEntityDialogView @JvmOverloads constructor(
 
   /** Sets the data in [CalcEntity] to this view's fields. */
   fun bind(entity: CalcEntity) {
+    entityId = entity.id
     typeSpinner.setSelection(typeValues.indexOf(entity.type))
     updateValueTypeAdapter()
     valueTypeSpinner.setSelection(entity.type.validValueTypes.indexOf(entity.valueType))

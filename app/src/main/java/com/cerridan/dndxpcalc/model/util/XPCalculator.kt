@@ -1,7 +1,6 @@
 package com.cerridan.dndxpcalc.model.util
 
 import com.cerridan.dndxpcalc.R
-import com.cerridan.dndxpcalc.R.string
 import com.cerridan.dndxpcalc.model.CalcEntity
 import com.cerridan.dndxpcalc.model.CalcResult
 import com.cerridan.dndxpcalc.model.EntityType.CHARACTER
@@ -84,23 +83,17 @@ object XPCalculator {
   }
 
   /** Transforms a [Ruleset] to a [RulesetModel] used for actual calculation. */
-  private fun createRulesetModel(ruleset: Ruleset): RulesetModel {
-    val crToXp = mutableMapOf<Int, Int>()
-    ruleset.crToXp.forEach { crToXp[it.cr] = it.xp }
-    val levelsToThresholds = mutableMapOf<Int, List<Int>>()
-    ruleset.encounterThresholds.forEach { levelsToThresholds[it.level] = it.thresholds }
-
-    return RulesetModel(
-      crToXp = crToXp,
-      levelsToDifficulty = levelsToThresholds,
-      xpToPlayerLevel = ruleset.playerLevels
-        .sortedBy(Ruleset.PlayerLevel::xp)
-        .map { it.xp to it.level },
-      monstersToMultipliers = ruleset.encounterMultipliers
-        .sortedBy(Ruleset.EncounterMultiplier::minMonsters)
-        .map { it.minMonsters to it.multipler }
-    )
-  }
+  private fun createRulesetModel(ruleset: Ruleset) = RulesetModel(
+    crToXp = ruleset.crToXp.associate { it.cr to it.xp },
+    levelsToDifficulty = ruleset.encounterThresholds
+        .associate { it.level to it.thresholds },
+    xpToPlayerLevel = ruleset.playerLevels
+      .sortedBy(Ruleset.PlayerLevel::xp)
+      .map { it.xp to it.level },
+    monstersToMultipliers = ruleset.encounterMultipliers
+      .sortedBy(Ruleset.EncounterMultiplier::minMonsters)
+      .map { it.minMonsters to it.multipler }
+  )
 
   /** Convenience extension for obtaining Monster XP from a [CalcEntity] */
   private val CalcEntity.monsterXp: Int
